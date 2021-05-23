@@ -1,43 +1,25 @@
-import React, {useState, useEffect} from "react";
-import axios from "axios";
-import {apiKey} from "../api/config";
-import Map from "./Map";
+import React from "react";
+import GoogleMapReact from 'google-map-react';
 
-export const TooltipMap = ({imageId, imageSecret, setHasGeoLocation}) => {
-    const [loading, setLoading] = useState(false);
-    const [imageCoordinates, setImageCoordinates] = useState({});
-
-    useEffect(() => {
-        setLoading(true);
-        axios
-            .get(
-                `https://api.flickr.com/services/rest/?method=flickr.photos.geo.getLocation&api_key=${apiKey}&photo_id=${imageId}&secret=${imageSecret}&format=json&nojsoncallback=1`
-            )
-            .then(res => {
-                if(res.data.photo){
-                    setHasGeoLocation(true);
-                    const coordinates = {
-                        lat : res.data.photo.location.latitude,
-                        long : res.data.photo.location.longitude,
-                        locality: res.data.photo.location.locality._content,
-                    }
-                    setImageCoordinates(coordinates);
-                }
-                setLoading(false);
-            })
-            .catch(error => {
-                console.log(
-                    "Encountered an error with fetching and parsing data",
-                    error
-                );
-            });
-    }, []);
+export const TooltipMap = ({lat, long}) => {
 
     const renderComponent = () => {
-        if(imageCoordinates.lat){
-            return <Map lat={imageCoordinates.lat} long={imageCoordinates.long} />
+        if(lat && long){
+            return (
+                <div style={{ height: '300px', width: '300px' }}>
+                    <GoogleMapReact
+                        bootstrapURLKeys={{ key: 'AIzaSyBpSOv4lvaP5p5r0-G39YNOIwzm3KaH_NE' }}
+                        defaultCenter={{
+                            lat: parseFloat(lat),
+                            lng: parseFloat(long),
+                        }}
+                        defaultZoom={13}
+                        options={{fullscreenControl: false, zoomControl : false, scaleControl: false, rotateControl: false, mapTypeControl: false, streetViewControl:false}}
+                    >
+                    </GoogleMapReact>
+                </div>
+            );
         }
-
         return null;
     }
 

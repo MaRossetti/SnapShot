@@ -14,7 +14,9 @@ const Gallery = props => {
       let secret = image.secret;
       let title = image.title;
       let url = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_m.jpg`;
-      return <Image url={url} key={id} imageId={id} alt={title} imageSecret = {secret} />;
+      let imgLat = image.lat ? image.lat : undefined;
+      let imgLong = image.long ? image.long : undefined;
+      return <Image url={url} key={id} alt={title} lat={imgLat} long={imgLong} />;
     });
   } else {
     noImages = <NoImages />; // return 'not found' component if no images fetched
