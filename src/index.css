@@ -136,7 +136,7 @@ input {
   margin-bottom: 15px;
 }
 
-.photo-container ul img {
+.photo-image {
   width: 100%;
   transform: scale(1.25);
   transition: transform 1.25s;

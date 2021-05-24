@@ -28,7 +28,9 @@ const PhotoContextProvider = props => {
                         const imageWithCoords = {
                           ...image,
                           lat: res.data.photo.location.latitude,
-                          long: res.data.photo.location.longitude
+                          long: res.data.photo.location.longitude,
+                          locality: res.data.photo.location.locality._content,
+                          country: res.data.photo.location.country._content,
                         }
                         return imageWithCoords
                       }else{
