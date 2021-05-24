@@ -1,5 +1,6 @@
 import React from "react";
 import GoogleMapReact from 'google-map-react';
+import {gmapsApiKey} from "../api/config";
 
 export const TooltipMap = ({lat, long, locality, country}) => {
 
@@ -9,7 +10,7 @@ export const TooltipMap = ({lat, long, locality, country}) => {
                 <div style={{ height: '300px', width: '300px' }}>
                     <h3>{locality} - {country}</h3>
                     <GoogleMapReact
-                        bootstrapURLKeys={{key: 'AIzaSyBpSOv4lvaP5p5r0-G39YNOIwzm3KaH_NE' }}
+                        bootstrapURLKeys={{key: gmapsApiKey }}
                         defaultCenter={{
                             lat: parseFloat(lat),
                             lng: parseFloat(long),

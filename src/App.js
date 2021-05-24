@@ -5,7 +5,6 @@ import Header from "./components/Header";
 import Item from "./components/Item";
 import Search from "./components/Search";
 import NotFound from "./components/NotFound";
-import {Test} from './components/Test'
 
 
 class App extends Component {
